@@ -489,6 +489,6 @@ app.use("/", (req, res, next) => {
   res.send("<h1>404 NOT FOUND PAGE !</h1>");
 });
 
-app.listen(3000, (req, res) => {
+app.listen(process.env.PORT || 3000, (req, res) => {
   console.log("listening at port 30000....");
 });
