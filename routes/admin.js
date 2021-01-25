@@ -321,6 +321,18 @@ router.get("/students", (req, res, next) => {
   }
   let len;
   Student.find((err, students) => {
+    if (err) {
+      return res.render("admin/students", {
+        loggedUserName: currentUser,
+        students: "",
+      });
+    }
+    if (!student) {
+      return res.render("admin/students", {
+        loggedUserName: currentUser,
+        students: "",
+      });
+    }
     len = students.length;
     asyncForEach(students, async (student) => {
       //console.log("for each");
