@@ -50,7 +50,7 @@
           <td><%=invite.remaining%></td>       
           <form action="/admin/invite/status/1" id="activate_<%=invite.id%>" method="post"><input type="text" name="id" value="<%=invite.id%>" hidden=""></form>
           <form action="/admin/invite/status/0" id="deactivate_<%=invite.id%>" method="post"><input type="text" name="id" value="<%=invite.id%>" hidden=""></form>
-          <td><input   class="form-control" style="width: 70%;display: inline-block;" type="text" id="inviteLink_<%=invite.id%>" value="http://localhost:3000/invite/<%=invite.id%>" readonly>
+          <td><input   class="form-control" style="width: 70%;display: inline-block;" type="text" id="inviteLink_<%=invite.id%>" value="https://tranquil-brook-44334.herokuapp.com/invite/<%=invite.id%>" readonly>
             <i class="far fa-copy fa-2x copybtn"  onclick="copyInvitation('<%=invite.id%>')" ></i>
             <!-- <button class="btn btn-outline-primary" onclick="copyInvitation()">Copy Link</button></td> -->
           <td>Deactive<label class="switch"><input class="<%=invite.id%>" type="checkbox" value="<%=invite.id%>" <%=invite.checked%> onclick="test(this)"><span class="slider round"></span></label>Active</td>

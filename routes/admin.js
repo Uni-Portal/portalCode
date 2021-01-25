@@ -148,7 +148,8 @@ router.post("/invite", (req, res, next) => {
       setClass = "success";
       text =
         "Click copy link to copy the invitation link and share it with user.";
-      link = "http://localhost:3000/invite/" + user._id + "/";
+      link =
+        "https://tranquil-brook-44334.herokuapp.com/invite/" + user._id + "/"; //http://localhost:3000/invite/
     } else {
       message = "Failed !";
       setClass = "fail";

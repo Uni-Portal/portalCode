@@ -20,5 +20,8 @@
     "passport": "^0.4.1",
     "passport-local-mongoose": "^6.1.0",
     "randomstring": "^1.1.5"
+  },
+  "engines": {
+    "node": "15.5.1"
   }
 }

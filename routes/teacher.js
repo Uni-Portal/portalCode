@@ -132,7 +132,10 @@ router.get("/referral", (req, res) => {
             message = "Key: " + key;
             setClass = "success";
             text = "Share this key and referral link with students.";
-            link = "http://localhost:3000/student/invite/" + rf._id + "/";
+            link =
+              "https://tranquil-brook-44334.herokuapp.com/student/invite/" +
+              rf._id +
+              "/";
           }
           return res.render("admin/invite", {
             title: "Referral",
@@ -147,7 +150,10 @@ router.get("/referral", (req, res) => {
         message = "Key: " + refer.key;
         setClass = "success";
         text = "Share this key and referral link with students.";
-        link = "http://localhost:3000/student/invite/" + refer._id + "/";
+        link =
+          "https://tranquil-brook-44334.herokuapp.com/student/invite/" +
+          refer._id +
+          "/";
         return res.render("admin/invite", {
           title: "Referral",
           setClass: setClass,
