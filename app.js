@@ -77,7 +77,7 @@ app.use("/admin", adminRoutes);
 
 app.use("/teacher", teacherRoutes);
 
-app.get("/register", (req, res) => {
+app.post("/register", (req, res) => {
   if (!req.isAuthenticated()) {
     res.redirect("/admin");
   }
