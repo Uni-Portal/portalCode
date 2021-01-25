@@ -1,0 +1,81 @@
+<%-include('partials/header')%>
+<link rel="stylesheet" href="/css/add-user.css">
+    <title><%=title%></title>
+    <noscript>
+      <H1>Browser Doesn't Supports JS ! </H1>
+    </noscript>
+  </head>
+  <body>
+    <!-- <topnavbar> -->
+      <%-include('partials/topnav',{loggedUserName:loggedUserName})%>
+
+    <!-- sidebar -->
+   <%-include('partials/sidenav')%>
+
+    <section id="body">
+      <div class="main form container-fluid">
+        <form action="/register" method="POST" class="user-form">
+          <p class="<%=setClass%> alert"><%=message%></p>
+          <i class="fas fa-user-circle fa-5x"></i>
+          <div class="user-data">
+            <h2 class="user-name">User Name</h2>
+            <p class="user-email">Email</p>
+          </div>
+          <br />
+          <div class="inputs">
+            <h5 class="input-label">Name:</h5>
+            <input
+              type="text"
+              name="userName"
+              placeholder="name"
+              class="form-control"
+              value=""
+              required
+              onkeyup="setName(this)"
+            /><br />
+            <h5 class="input-label">Email:</h5>
+            <input
+              type="email"
+              name="userMail"
+              placeholder="email"
+              class="form-control"
+              required
+              value=""
+              onkeyup="setMail(this)"
+            /><br />
+            <h5 class="input-label">Mobile:</h5>
+            <input
+              type="tel"
+              name="userMobile"
+              required
+              placeholder="Mobile Number"
+              pattern="[0-9]{10}"
+              class="form-control"
+            /><br />
+            <!-- <label for="userType" class="input-label">Choose User Type: </label> -->
+            <h5 class="input-label">Choose User-Type:</h5>
+            <select
+              name="userType"
+              id="userType"
+              placeholder="Select User-Type"
+              class="form-control"
+              required
+            >
+              <option value="">Select User Type</option>
+              <option value="2">Teacher</option>
+              <option value="3">Student</option>
+            </select>
+            <br />
+
+            <button class="btn btn-success btn-lg add-user">Add User</button>
+            <input
+              type="reset"
+              class="btn btn-info btn-lg reset"
+              value="Reset"
+            />
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <%-include('partials/footer')%>

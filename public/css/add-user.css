@@ -1,0 +1,42 @@
+.input-label {
+  display: inline-block;
+}
+.form-control {
+  width: 100%;
+  max-width: 300px;
+  display: inline-block;
+  margin-bottom: 20px;
+}
+
+.form {
+  border-color: black;
+  border-style: dashed;
+  background-color: #f8f9fa;
+}
+form {
+  padding: 2%;
+  padding-top: 20px;
+}
+.inputs {
+  margin: 20px;
+  padding: 20px;
+}
+
+.user-data {
+  display: inline-block;
+}
+
+.success {
+  text-align: center;
+  margin: 0px;
+  color: #28a745;
+  font-size: 80%;
+  display: hide;
+}
+
+.error {
+  text-align: center;
+  margin: 0px;
+  color: red;
+  font-size: 80%;
+}

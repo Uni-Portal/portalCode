@@ -1,0 +1,117 @@
+<%-include('partials/header')%>
+    <!--  <link rel="stylesheet" type="text/css" href="/css/teacher.css" /> -->
+    <title>Dashboard</title>
+    <link rel="stylesheet" type="text/css" href="/css/teacher-dash.css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1"
+      crossorigin="anonymous"
+    />
+  </head>
+
+  <body id="body">
+    <!-- top nav -->
+    <%-include('partials/top_nav')%>
+    <div class="componenets" id="body">
+<!-- side nav -->
+<%-include('partials/side_nav')%>
+      <h1 class="comp_header"><span class="header_border">Courses</span></h1>
+      <span class="message <%=setClass%>"><h3><%=message%></h3></span>
+      <span class="comp_Add">
+        <button
+          type="Submit"
+          id="add_course"
+          class="btn btn-outline-success add_course"
+        >
+          Add Course
+        </button>
+      </span>
+      <div class="comp">
+        <div class="container">
+          <div class="row">
+            <% courses.forEach((course)=>{ %>
+
+            <div class="col-sm-3 sub_col">
+              <h4 class="comp__h2"><%=course.title%></h4>
+              <p><%=course.description%></p>
+              <form
+                action="/teacher/course/"
+                id="course-id-<%=course.uniqueCode%>"
+                method="post"
+              >
+                <input
+                  type="text"
+                  name="courseId"
+                  value="<%=course.id%>"
+                  hidden
+                />
+              </form>
+              <button
+                type="submit"
+                class="btn btn-outline-success"
+                form="course-id-<%=course.uniqueCode%>"
+              >
+                More
+              </button>
+              <button type="button" class="btn btn-outline-danger">
+                Delete
+              </button>
+              <a
+                class="share-course"
+                href="/teacher/course/share/<%=course.uniqueCode%>"
+                ><i class="fas fa-share-alt fa-2x share"></i
+              ></a>
+            </div>
+            <% }) %>
+          </div>
+        </div>
+      </div>
+      <div class="pop-upbackground">
+        <div class="pop_up-add">
+          <div class="main_popup">
+            <span class="popup_head">Add New Courses</span>
+            <span class="close" id="closeBtn">&times;</span>
+            <div class="border_bottom-popup"></div>
+            <div class="popup_body">
+              <form action="/teacher/add-course" method="post">
+                <div class="popup-course">
+                  <label for="name" class="popup-course_label"
+                    >Course Name</label
+                  >
+                  <input
+                    class="popup-course_name"
+                    type="text"
+                    autocomplete="off"
+                    name="title"
+                    required
+                  />
+                </div>
+                <div class="popup-inv">
+                  <label for="name" class="popup-course_label"
+                    >Description</label
+                  >
+                  <textarea
+                    class="popup-course_name"
+                    id="invi"
+                    type="text"
+                    autocomplete="off"
+                    name="description"
+                  ></textarea>
+                </div>
+                <button
+                  type="submit"
+                  class="btn btn-outline-success popup-button"
+                >
+                  Add Course
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+<!-- footer script -->
+<%-include('partials/footer_script')%>
+  </body>
+</html>

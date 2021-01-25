@@ -1,0 +1,84 @@
+<%-include('partials/header')%>
+    <title>Dashboard</title>
+  </head>
+  <body>
+<!-- <topnav> -->
+<%-include('partials/topnav.ejs',{loggedUserName:loggedUserName})%>
+<!-- sidebar --> 
+<%-include('partials/sidenav')%>
+    <section id="body">
+    
+      <div class="main">        
+
+        <!-- <input type="text" value="" hidden> -->     
+        
+        <!-- <div class="btn-group" role="group" aria-label="Basic example" >
+          <a  class="btn btn-outline-success" href="/admin/dashboard/active">Active</a>
+          <a  class="btn btn-outline-info" href="/admin/dashboard/active" >Pending</a>
+          <a class="btn btn-outline-warning" href="/admin/dashboard/active" >Expired</a>
+        </div> -->
+
+        <form class="invite" action="/admin/invite" method="POST" >
+          <input type="search" onkeyup="searchUser(this)" name="inviteMail" class="form-control invite-mail" placeholder="Enter Email" style="width: 20%;display: inline-block; margin-left: 20px;" required autofocus>
+          <button type="submit" class="btn btn-success invite-button" disabled="">Invite</button>
+        </form>
+
+   
+
+        <div class="container">
+
+          <div class="row">
+            <% teachers.forEach((teacher)=>{%>                          
+            <div class="col-lg-3.9 teacher <%=teacher.setClass%>">
+              <i class="fas fa-user-circle fa-3x profile"></i>
+              <div class="teacher-data">
+                <h3 class="teacher-name"><%=teacher.name%></h3>
+                <h4 class="teacher-email"><%=teacher.email%></h4>
+              </div>
+              <div class="teacher-data2">
+                <h4>Total Students: <%=teacher.totalStudents%></h4>
+                <h4>Joined Date: <%=teacher.time%></h4>
+                <form id="<%=teacher.email%>_details" action="/admin/teacher/details" method="post"><input type="text" value="<%=teacher.email%>" name="teacherMail" hidden></form>
+                <form id="<%=teacher.email%>_delete" action="/admin/teacher/delete" method="post"><input type="text" value="<%=teacher.email%>" name="teacherMail" hidden></form>
+                <button class="btn btn-outline-dark" form="<%=teacher.email%>_details" >More Details</button>                
+                <button class="btn btn-outline-danger" form="<%=teacher.email%>_delete" type="submit" href="/admin/teacher/delete/" >Delete User</button>             
+              
+              </div>
+            </div>
+            <%  })                           %>
+            <!-- <div class="col teacher">
+              <i class="fas fa-user-circle fa-3x"></i>
+              <div class="teacher-data">
+                <h3 class="teacher-name">Teacher Name</h3>
+                <h4 class="teacher-email">Email</h4>
+              </div>
+              <div class="teacher-data2">
+                <h4>Total Students: 100</h4>
+                <h4>Joined Date: 20/10/2020</h4>
+                <button class="btn btn-outline-dark">More Details</button>
+                <button class="btn btn-outline-danger">Delete User</button>
+              </div>
+            </div> -->
+
+            <!-- <div class="col teacher">
+              <i class="fas fa-user-circle fa-3x"></i>
+              <div class="teacher-data">
+                <h3 class="teacher-name">Teacher Name</h3>
+                <h4 class="teacher-email">Email</h4>
+              </div>
+              <div class="teacher-data2">
+                <h4>Total Students: 100</h4>
+                <h4>Joined Date: 20/10/2020</h4>
+                <button class="btn btn-outline-dark">More Details</button>
+                <button class="btn btn-outline-danger">Delete User</button>
+              </div>
+            </div> -->
+          </div>
+        </div>        
+      </div>
+    </section>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+ 
+    <%-include('partials/footer')%>

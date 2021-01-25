@@ -1,0 +1,83 @@
+<%-include('partials/header')%>
+    <script src="https://kit.fontawesome.com/f115102cba.js" crossorigin="anonymous"></script>
+    <title>Invitations</title>
+  </head>
+  <body>
+
+	<!-- <topnavbar> -->
+		<%-include('partials/topnav',{loggedUserName:loggedUserName})%>
+
+		<!-- sidebar -->
+	   <%-include('partials/sidenav')%>  	
+
+  	<section id="body">
+  		<div class="main">
+  			<form class="invite" action="/admin/invite" method="POST">
+          <div class="btn-group">
+            <button type="submit" class="btn btn-info"><%=category%></button>
+            <button type="button" class="btn btn-info dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <span class="sr-only">Toggle Dropdown</span>
+            </button>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" href="/admin/teacher/invitations/">All Invites</a>
+              <a class="dropdown-item" href="/admin/teacher/invitations/active">Active</a>
+              <a class="dropdown-item" href="/admin/teacher/invitations/expired">Expired</a>
+          </div>
+          </div>
+	  			<input type="search" onkeyup="searchUser(this)" name="inviteMail" class="form-control" placeholder="Enter Email" style="width: 20%;display: inline-block;" required autofocus>
+	  			<button type="submit" class="btn btn-success invite-button" disabled="">Invite</button>
+  			</form>
+        <div class="table">
+        <table class="table table-hover">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Email</th>
+          <th scope="col">Expiry</th>
+          <th scope="col">Remaining Days</th>
+          <th scope="col">Link</th>
+          <th scope="col">Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% invitations.forEach((invite)=>{   %>
+
+         
+        <tr id="<%=invite.setId%>" class="invites">
+          <th scope="row"><%=invite.sl%></th>
+          <td><%=invite.email%></td>
+          <td><%=invite.expiry%></td>   
+          <td><%=invite.remaining%></td>       
+          <form action="/admin/invite/status/1" id="activate_<%=invite.id%>" method="post"><input type="text" name="id" value="<%=invite.id%>" hidden=""></form>
+          <form action="/admin/invite/status/0" id="deactivate_<%=invite.id%>" method="post"><input type="text" name="id" value="<%=invite.id%>" hidden=""></form>
+          <td><input   class="form-control" style="width: 70%;display: inline-block;" type="text" id="inviteLink_<%=invite.id%>" value="http://localhost:3000/invite/<%=invite.id%>" readonly>
+            <i class="far fa-copy fa-2x copybtn"  onclick="copyInvitation('<%=invite.id%>')" ></i>
+            <!-- <button class="btn btn-outline-primary" onclick="copyInvitation()">Copy Link</button></td> -->
+          <td>Deactive<label class="switch"><input class="<%=invite.id%>" type="checkbox" value="<%=invite.id%>" <%=invite.checked%> onclick="test(this)"><span class="slider round"></span></label>Active</td>
+        </tr>   
+        <%  })                        %>     
+      </tbody>
+    </table>
+    </div>
+
+
+		</div>
+  </section>
+
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript" src="/assets/index.js"></script>
+    <script type="text/javascript" src="/assets/toggler.js"></script>
+    <script type="text/javascript" src="/assets/search-invite.js"></script>
+
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+  </body>
+</html>

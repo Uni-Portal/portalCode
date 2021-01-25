@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="/css/signup.css" type="text/css" rel="stylesheet" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript" src="/assets/pass.js"></script>
+    <title>Sign Up</title>
+  </head>
+
+  <body>
+    <div class="bg_image">
+      <!-- <img src="assets/img/website background 3.svg" alt=""> -->
+    </div>
+    <div class="logincontainer">
+      <h2 class="form-title">Create account</h2>
+      <form class="" action="/user/register" method="post">
+        <div class="form-group">
+          <input
+            type="text"
+            class="text_area"
+            name="name"
+            id="name"
+            placeholder=" "
+            required
+          />
+          <label for="name" class="text_label">Name</label>
+        </div>
+        <div class="form-group">
+          <input
+            type="email"
+            class="text_area email"
+            name="email"
+            value="<%=email%>"
+            id="email"
+            placeholder=" "
+            readonly
+            required
+          />
+          <label for="email" class="text_label">Email Address</label>
+        </div>
+        <div class="form-group">
+          <input
+            type="password"
+            class="text_area"
+            name="password"
+            id="password"
+            placeholder=" "
+            required
+          />
+          <label for="password" class="text_label">Password</label>
+        </div>
+        <div class="form-group">
+          <input
+            type="password"
+            class="text_area password"
+            name="re_password"
+            id="repassword"
+            placeholder=" "
+            onkeyup="checkPass(this)"
+            required
+          />
+          <label for="repassword" class="text_label">Confirm Password</label>
+        </div>
+        <div class="form-group">
+          <input
+            type="text"
+            name="userType"
+            class="userType"
+            value="<%=userType%>"
+            hidden
+            required
+          />
+          <input
+            type="text"
+            class="teacher"
+            name="teacher"
+            value="<%=teacher%>"
+            hidden
+          />
+          <input type="text" name="key" value="<%=key%>" hidden />
+          <!-- <input type="checkbox" name="agree-term" id="agree-term" class="agree-term" />
+          <label for="agree-term" class="label-agree-term"><span><span></span></span>I agree all statements in  <a href="#" class="term-service">Terms of service</a></label> -->
+        </div>
+        <button type="submit" class="login_button" id="button">
+          <i class="fas fa-arrow-circle-right"></i> CONTINUE
+        </button>
+      </form>
+    </div>
+  </body>
+</html>

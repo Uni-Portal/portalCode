@@ -1,0 +1,188 @@
+/* font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; */
+
+#body {
+  background-color: whitesmoke;
+}
+.navbar {
+  background-color: #375263;
+  color: whitesmoke;
+  font-weight: bolder;
+  box-shadow: 0 0px 11px #00000094;
+  position: fixed;
+}
+@media (min-width: 992px) {
+  .toggleright {
+    margin-right: 3.5rem;
+  }
+}
+
+.left_nav {
+  background-color: #214252;
+  width: 16%;
+  height: 100%;
+
+  position: fixed;
+  display: block;
+}
+.left_nav-comp {
+  position: relative;
+  top: 7%;
+}
+.left_nav-li {
+  color: rgb(243, 235, 235);
+  font-size: 1.2em;
+  list-style-type: none;
+  margin-top: 15px;
+}
+.comp_header {
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  position: relative;
+  width: 0%;
+  left: 18.5%;
+  top: 13%;
+}
+
+.header_border {
+  border-bottom: 1px solid black;
+}
+
+.componenets {
+  display: flex;
+  width: 100%;
+  height: 100vh;
+}
+
+.comp {
+  width: 80%;
+  height: 100vh;
+  position: relative;
+  left: 18%;
+  top: 30%;
+  right: auto;
+  display: flex;
+  height: 80%;
+}
+
+.comp-sub_col {
+  width: 90%;
+  left: 90%;
+  margin-top: 50%;
+}
+.sub_col {
+  /* margin-right: auto; */
+  margin-left: 5%;
+  margin-bottom: 2rem;
+  padding: 12px;
+  background-color: #dce3e7;
+  border-radius: 5px;
+  box-shadow: 2px 3px 7px rgba(0, 0, 0, 0.548);
+}
+.comp__h2 {
+  width: 100%;
+}
+
+.comp_Add {
+  position: absolute;
+  right: 7%;
+  top: 5.5rem;
+  z-index: 5;
+}
+
+.pop_up-add {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-30%, -40%);
+  border: 1px solid black;
+  width: 40%;
+  height: 50vh;
+  z-index: 20;
+  border-radius: 12px;
+
+  background-color: rgb(247, 244, 244);
+}
+.popup_head {
+  position: absolute;
+  color: rgba(54, 54, 54, 0.767);
+  font-size: 1.8vw;
+  top: 4%;
+  left: 7%;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+.border_bottom-popup {
+  position: relative;
+  top: 4rem;
+  border-bottom: 1px solid rgba(88, 88, 88, 0.685);
+}
+.popup_body {
+  position: absolute;
+  top: 25%;
+  left: 15%;
+  width: 70%;
+}
+.popup-course_label {
+  font-size: 0.9vw;
+}
+.popup-course_name {
+  width: 100%;
+  border-radius: 5px;
+  outline: none;
+  border: 1px solid gray;
+}
+#invi {
+  position: relative;
+  height: 12vh;
+}
+.close {
+  position: absolute;
+  font-size: 2.5vw;
+  font-weight: 200;
+  right: 7%;
+  cursor: pointer;
+  /* background-color: transparent;
+        border: transparent; */
+}
+.popup-button {
+  position: absolute;
+  top: 29vh;
+  right: 0%;
+}
+.pop-upbackground {
+  display: none;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100vh;
+  z-index: 10;
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0); /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.521); /* Black w/ opacity */
+}
+
+.message {
+  position: absolute;
+  top: 5.5rem;
+  left: 45%;
+}
+
+.success {
+  color: rgb(34, 209, 3);
+}
+
+.fail {
+  color: red;
+}
+
+.share {
+  color: rgb(54, 54, 95);
+  position: relative;
+  top: 4%;
+  left: 6px;
+}
+
+.share:hover {
+  color: rgb(82, 82, 129);
+}

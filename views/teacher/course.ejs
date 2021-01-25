@@ -1,0 +1,169 @@
+<%-include('partials/header')%>
+    <link rel="stylesheet" type="text/css" href="/css/course.css" />
+    <title>Course Details</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1"
+      crossorigin="anonymous"
+    />
+  </head>
+
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">Navbar</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0"></ul>
+          <form class="d-flex">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0 right">
+              <li class="nav-item dropdown">
+                <a
+                  class="nav-link dropdown-toggle toggleright"
+                  href="#"
+                  id="navbarDropdown"
+                  role="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                 <%=loggedUserName%>
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <li><a class="dropdown-item" href="#">Action</a></li>
+                  <li><a class="dropdown-item" href="#">Another action</a></li>
+                  <li>
+                    <hr class="dropdown-divider" />
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="#">Something else here</a>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </form>
+        </div>
+      </div>
+    </nav>
+
+    <div class="componenets">
+        <%-include('partials/side_nav')%>
+
+      <div class="course_container">
+        <h1 class="course_head">
+          <spna class="hear--border">Course Name</spna>
+        </h1>
+        <h5 class="assi__created">
+          Created Date <span class="assi__date">__/__/__</span>
+        </h5>
+        <h5 class="assi__created">
+          Student Alloted <span class="assi__date">_____</span>
+        </h5>
+        <div class="row con_sub-col">
+          <div class="col sub_col">
+            <h5 class="assi_head">
+              <span class="assi__border">All Assingments</span>
+            </h5>
+            <form class="d-flex">
+              <input
+                class="form-control me-2 course_form"
+                type="search"
+                placeholder="Search"
+              />
+              <button class="btn btn-outline-success btn-search" type="submit">
+                Search
+              </button>
+              <button type="button" class="btn btn-outline-success btn-more">
+                Assingment
+              </button>
+            </form>
+            <!-- <button type="button" class="btn btn-outline-dark btn-lg">Searchbar</button> -->
+            <div class="scroll_div">
+              <ol class="form__ol">
+                <li class="form__li">
+                  Assingment 1<span class="date__ass">__/__/__</span>
+                </li>
+                <li class="form__li">
+                  Assingment 2<span class="date__ass">__/__/__</span>
+                </li>
+                <li class="form__li">
+                  Assingment 3<span class="date__ass">__/__/__</span>
+                </li>
+                <li class="form__li">
+                  Assingment 4<span class="date__ass">__/__/__</span>
+                </li>
+                <li class="form__li">
+                  Assingment 5<span class="date__ass">__/__/__</span>
+                </li>
+                <li class="form__li">
+                  Assingment 6<span class="date__ass">__/__/__</span>
+                </li>
+              </ol>
+            </div>
+          </div>
+          <div class="col sub_col">
+            <h5 class="assi_head">
+              <span class="assi__border">Student Allorted to this Course</span>
+            </h5>
+            <form class="d-flex">
+              <input
+                class="form-control me-2 course_form"
+                type="search"
+                placeholder="Search"
+              />
+              <button class="btn btn-outline-success btn-search" type="submit">
+                Search
+              </button>
+              <button type="button" class="btn btn-outline-success btn-more">
+                Student
+              </button>
+            </form>
+            <!-- <button type="button" class="btn btn-outline-dark btn-lg">Searchbar</button> -->
+            <div class="scroll_div">
+              <ol class="form__ol">
+                <li class="form__li">
+                  Subhrojyoti Bhowmick<span class="form__span-check"
+                    ><input class="form__check" type="checkbox"
+                  /></span>
+                </li>
+                <li class="form__li">
+                  Subhayan Sarkar<span class="form__span-check"
+                    ><input class="form__check" type="checkbox"
+                  /></span>
+                </li>
+                <li class="form__li">
+                  Swarnali Paul<span class="form__span-check"
+                    ><input class="form__check" type="checkbox"
+                  /></span>
+                </li>
+                <li class="form__li">
+                  Susmita Das<span class="form__span-check"
+                    ><input class="form__check" type="checkbox"
+                  /></span>
+                </li>
+                <li class="form__li">
+                  Sudip Das<span class="form__span-check"
+                    ><input class="form__check" type="checkbox"
+                  /></span>
+                </li>
+              </ol>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+<!-- footer script -->
+<%-include('partials/footer_script')%>
+  </body>
+</html>

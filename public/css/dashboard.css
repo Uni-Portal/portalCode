@@ -1,0 +1,216 @@
+/*.customLink{
+	margin-left: 85%;
+}*/
+
+.sidenav {
+  height: 100%;
+  width: 200px;
+  position: fixed;
+  z-index: -1;
+  top: 0;
+  left: 0;
+  background-color: #394867;
+  overflow-x: hidden;
+  padding-top: 20px;
+}
+
+.sidenav a {
+  padding: 6px 8px 6px 16px;
+  text-decoration: none;
+  font-size: 25px;
+  color: white;
+  display: block;
+}
+
+.sidenav a:hover {
+  color: black;
+}
+.main {
+  margin-left: 200px; /* Same as the width of the sidenav */
+  font-size: 28px; /* Increased text to enable scrolling */
+  padding: 0px 10px;
+  width: 80%;
+}
+
+.customButton {
+  margin-right: 25px;
+}
+
+.fix {
+  position: fixed;
+}
+.sidenav-links {
+  margin-top: 3rem;
+}
+.side-link {
+  margin-top: 15px;
+}
+
+.main {
+  position: absolute;
+  top: 80px;
+  left: 50px;
+  right: 50px;
+  z-index: -1;
+  /*background-color:#F8F9FA;*/
+}
+
+.main p {
+  padding: 2%;
+}
+
+/*.teacher-name{
+	display: inline-block;
+}
+.teacher-email{
+	display: inline-block;
+}*/
+
+.teacher {
+  background-color: #f8f9fa;
+  padding: 2%;
+  margin-top: 15px;
+  margin-left: 10px;
+  width: 30%;
+  display: inline-block;
+  text-align: center;
+  /*margin-right:1px;
+	margin-top: 2%;*/
+}
+
+.teacher-data {
+  /* display: inline-block; */
+}
+
+.teacher-data2 {
+  margin: 1%;
+  padding: 2%;
+}
+
+.teacher-email {
+  font-size: 55%;
+}
+
+.hidden {
+  display: none;
+}
+
+.invite {
+  text-align: right;
+  margin-bottom: 15px;
+  margin-right: 80px;
+  margin-left: 20px;
+}
+.fas.fa-user-circle.fa-3x.profile {
+  display: flex;
+  justify-content: center;
+}
+
+/* for invite - Subhro*/
+
+.btn-group {
+  position: relative;
+  margin-right: 2%;
+  transform: scale(1.07);
+  z-index: 5;
+}
+.teacher-data {
+  display: inline-block;
+}
+
+.teacher-data2 {
+  margin: 1%;
+  padding: 2%;
+}
+
+.hidden {
+  display: none;
+}
+.invite {
+  text-align: right;
+  margin-bottom: 15px;
+  margin-right: 77px;
+}
+.table {
+  position: absolute;
+  top: 150%;
+  font-size: 80%;
+  text-align: center;
+  z-index: 3;
+}
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+  transform: translateY(-10%) scale(0.7);
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+input:checked + .slider {
+  background-color: green;
+  transition: 0.5s;
+}
+
+input:not(:checked) + .slider {
+  background-color: red;
+  transition: 0.5s;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196f3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+.copybtn {
+  position: relative;
+  left: 4px;
+  top: 5px;
+}
+
+.copybtn:hover {
+  cursor: pointer;
+  color: rgb(66, 66, 148);
+}

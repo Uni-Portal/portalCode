@@ -1,0 +1,74 @@
+<%-include('partials/header')%>
+    <script src="https://kit.fontawesome.com/f115102cba.js" crossorigin="anonymous"></script>
+    <title>Students</title>
+  </head>
+  <body>
+
+	<!-- <topnavbar> -->
+		<%-include('partials/topnav',{loggedUserName:loggedUserName})%>
+
+		<!-- sidebar -->
+	   <%-include('partials/sidenav')%>  	
+
+  	<section id="body">
+  		<div class="main">
+  			<form class="invite">
+          <!-- <div class="btn-group">
+            <button type="button" class="btn btn-info">Invited Status</button>
+            <button type="button" class="btn btn-info dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <span class="sr-only">Toggle Dropdown</span>
+            </button>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" href="#">Active</a>
+              <a class="dropdown-item" href="#">Expired</a>
+          </div>
+          </div> -->
+	  			<input type="search" onkeyup="searchUser(this)" name="inviteMail" class="form-control" placeholder="Search for student details" style="width: 20%;display: inline-block;" required autofocus>
+	  			<!-- <button type="submit" class="btn btn-success invite-button" disabled="">Search</button> -->
+          <i class="fas fa-search" style="color: rgb(72, 72, 128);"></i>
+        </form>
+        <div class="table">
+        <table class="table table-hover">
+      <thead>
+        <tr>
+          <th scope="col">Serial </th>
+          <th scope="col">Student</th>
+          <th scope="col">Student Email</th>
+          <th scope="col">Teacher</th>
+          <th scope="col">Teacher Email</th>
+          <th scope="col">Joining Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% students.forEach((student)=>{     %>         
+        <tr class="students" id="<%=student.id%>">
+          <th scope="row"><%=student.sl%></th>
+          <td><%=student.name%></td>
+          <td><%=student.email%></td>
+          <td><%=student.teacherName%></td>
+          <td><%=student.teacherMail%></td>
+          <td><%=student.joined%></td>
+        </tr>
+       <%  })                %>
+      </tbody>
+    </table>
+    </div>
+
+		</div>
+  </section>
+
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript" src="/assets/index.js"></script>
+
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+  </body>
+</html>

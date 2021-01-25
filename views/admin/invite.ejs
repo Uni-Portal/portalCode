@@ -1,0 +1,22 @@
+<%-include('partials/header')%>
+<link rel="stylesheet" href="/css/invite.css">
+<title><%=title%></title>
+</head>
+<body>
+
+
+
+<div class="jumbotron jumbotron-fluid">
+    <div class="container">
+      <h1 class="display-4 <%=setClass%> message" ><%=message%></h1>
+      <p class="lead"><%=text%></p>
+      <hr class="my-4">
+      <input type="text" class="form-control link"  value="<%=setLink%>" id="inviteLink" readonly>
+      <br>
+      <a type="button" class="btn btn-primary btn-lg" href="<%=dashLink%>">Dashboard</a>
+      <button type="button" class="btn btn-success btn-lg copy-link" onclick="copyInvitation()">Copy Link</button>
+    </div>
+  </div>
+  
+  
+<%-include('partials/footer')%>
