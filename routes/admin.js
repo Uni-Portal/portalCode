@@ -327,7 +327,7 @@ router.get("/students", (req, res, next) => {
         students: [],
       });
     }
-    if (!student) {
+    if (!students) {
       return res.render("admin/students", {
         loggedUserName: currentUser,
         students: [],
