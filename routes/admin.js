@@ -324,13 +324,13 @@ router.get("/students", (req, res, next) => {
     if (err) {
       return res.render("admin/students", {
         loggedUserName: currentUser,
-        students: "",
+        students: [],
       });
     }
     if (!student) {
       return res.render("admin/students", {
         loggedUserName: currentUser,
-        students: "",
+        students: [],
       });
     }
     len = students.length;
