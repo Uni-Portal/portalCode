@@ -486,7 +486,8 @@ app.get("/test2", (req, res) => {
 });
 
 app.use("/", (req, res, next) => {
-  res.send("<h1>404 NOT FOUND PAGE !</h1>");
+  res.render("error404");
+  // res.send("<h1>404 NOT FOUND PAGE !</h1>");
 });
 
 app.listen(process.env.PORT || 3000, (req, res) => {

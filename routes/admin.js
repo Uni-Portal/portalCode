@@ -322,12 +322,14 @@ router.get("/students", (req, res, next) => {
   let len;
   Student.find((err, students) => {
     if (err) {
+      console.log(err);
       return res.render("admin/students", {
         loggedUserName: currentUser,
         students: [],
       });
     }
     if (!students) {
+      console.log("no student");
       return res.render("admin/students", {
         loggedUserName: currentUser,
         students: [],

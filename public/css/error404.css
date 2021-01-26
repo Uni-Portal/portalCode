@@ -1,0 +1,67 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+@font-face {
+  src: url("/assets/fonts/Hacked-KerX.woff2");
+  font-family: error;
+}
+@font-face {
+  src: url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100&display=swap");
+  font-family: Montserrat;
+}
+body {
+  background-color: black;
+}
+.bggifs {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-image: url("https://nofilmschool.com/sites/default/files/styles/article_wide/public/aerial_0.png?itok=2ZmWWW3d");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  opacity: 40%;
+  z-index: -3;
+}
+.headline {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80%;
+  height: 50%;
+  text-align: center;
+  border-radius: 30px;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+h1 {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: error;
+  font-weight: 100;
+  color: white;
+  margin-bottom: 30%;
+  font-size: 8vw;
+  letter-spacing: 0.4vw;
+}
+.fontamz {
+  margin-right: 1vw;
+}
+p {
+  width: 60%;
+  color: white;
+  font-family: Montserrat;
+  font-size: 2vw;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+  top: 60%;
+  left: -0.7%;
+}
+.fas {
+  color: red;
+  transform: scale(1.2);
+}
