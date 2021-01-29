@@ -5,7 +5,7 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node app.js"
+    "start": "nodemon app.js"
   },
   "author": "Subhayan Sarkar",
   "license": "ISC",
@@ -15,6 +15,7 @@
     "cors": "^2.8.5",
     "ejs": "^3.1.5",
     "express": "^4.17.1",
+    "express-fileupload": "^1.2.1",
     "express-session": "^1.17.1",
     "mongoose": "^5.11.12",
     "passport": "^0.4.1",

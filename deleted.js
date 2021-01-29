@@ -137,3 +137,28 @@
 //   });
 //   res.render("admin/invite");
 // });
+
+//-------------------student dash------------------------------------------
+// const assignments = [];
+// result.forEach((r) => {
+//   r.assignments.forEach((assignment) => {
+//     //console.log(assignment);
+//     assignments.push(assignment);
+//   });
+// });
+// const assignmentData = await Promise.all(
+//   assignments.map((assignment) => {
+//     return Assignment.findOne({ _id: assignment, isActive: true });
+//   })
+// );
+
+// //assignmentData[0] === null
+// const pending = [];
+// console.log(assignmentData);
+// //check for pending one !
+// assignmentData.forEach((assignment) => {
+//   if (assignment === null)
+//     return;
+//   const created = assignment.created;
+
+// });

@@ -2,6 +2,7 @@ const express = require("express");
 const randomstring = require("randomstring");
 
 const router = express.Router();
+// router.use(fileUpload);
 
 var Cookies = require("cookies");
 var keys = ["keyboard cat"];
@@ -16,7 +17,7 @@ function generateRandom() {
 }
 
 const schema = require("../schema");
-const { assignmentSchema } = require("../schema");
+const { assignmentSchema, submissionSchema } = require("../schema");
 const {
   adminSchema,
   teacherSchema,
@@ -33,6 +34,7 @@ const Invite = mongoose.model("invite", inviteSchema);
 const Refer = mongoose.model("referral", referralSchema);
 const Course = mongoose.model("course", courseSchema);
 const Assignment = mongoose.model("assignment", assignmentSchema);
+const Submission = mongoose.model("submission", submissionSchema);
 
 router.get("/dashboard", (req, res, next) => {
   if (!req.isAuthenticated()) {
@@ -50,6 +52,7 @@ router.get("/dashboard", (req, res, next) => {
     }
   }
   const email = req.user.username;
+  let teacherId;
   Teacher.findOne({ email: email }, (err, user) => {
     if (!err) {
       if (!user) {
@@ -60,11 +63,13 @@ router.get("/dashboard", (req, res, next) => {
         });
       }
     }
+    teacherId = user._id;
     var cookies = new Cookies(req, res, { keys: keys });
     cookies.set("User", user.name, { signed: true });
     const courseSet = [];
     let promise = new Promise((resolve, reject) => {
-      Course.find({ teacher: req.user.username }, (err, courses) => {
+      //console.log(teacherId);
+      Course.find({ teacher: teacherId }, (err, courses) => {
         if (!err) {
           if (courses) {
             courses.forEach((course) => {
@@ -171,135 +176,151 @@ router.post("/add-course", (req, res) => {
   if (!req.isAuthenticated()) {
     return res.redirect("/login");
   }
+  //console.log(req.user._id);
   const key = randomstring.generate({
     length: 6,
     charset: "alphanumeric",
   });
-  const newCourse = new Course({
-    teacher: req.user.username,
-    title: req.body.title,
-    description: req.body.description,
-    uniqueCode: key,
-  });
-  newCourse.save((err) => {
+  Teacher.findOne({ email: req.user.username }, (err, teacher) => {
     if (!err) {
-      let stat = encodeURIComponent("success");
-      return res.redirect("/teacher/dashboard/?status=" + stat);
-    } else {
-      let stat = encodeURIComponent("fail");
-      return res.redirect("/teacher/dashboard/?status=" + stat);
+      addCourse(teacher._id);
     }
   });
-});
 
-//route under work ! integration remaining with front
-router.post("/course", (req, res, next) => {
-  const courseId = req.body.courseId;
-  let assignments = [],
-    students = [];
-  let promise = new Promise((resolve, reject) => {
-    Course.findById({ _id: courseId }, (err, course) => {
+  const addCourse = (id) => {
+    const newCourse = new Course({
+      teacher: id,
+      title: req.body.title,
+      description: req.body.description,
+      uniqueCode: key,
+    });
+    newCourse.save((err) => {
       if (!err) {
-        if (course) {
-          assignments = course.assignments;
-          assignments.push("600ea1da418e8461e0f577cf");
-          assignments.push("600ea1da418e8461e0f577df");
-          students = course.students;
-          students.push("600ea1da418e8461e0f577ch");
-          students.push("600ea1da418e8461e0f587ch");
-        }
+        let stat = encodeURIComponent("success");
+        return res.redirect("/teacher/dashboard/?status=" + stat);
+      } else {
+        let stat = encodeURIComponent("fail");
+        return res.redirect("/teacher/dashboard/?status=" + stat);
       }
-      const data = {
-        assignments: assignments,
-        students: students,
-      };
-      return resolve(data);
-    }); //course-end
-  }); //promise-1 end
-
-  //getting all name of assignments
-  promise.then(async ({ assignments, students }) => {
-    console.log("after first course find");
-
-    getAssignmentData(assignments, students);
-    // getStudentData(students);
-    //assignmentData = await getAssignmentData(assignments);
-
-    //const studentData = await getStudentData(students);
-    //getAssignmentData(assignments).then(console.log("printing"));
-    //console.log(getStudentData);
-  }); //1st promise then end
-
-  async function getAssignmentData(assignments, students) {
-    console.log("assignment data");
-    const dt = [];
-    const len = assignments.length;
-    for (let i = 0; i < assignments.length; i++) {
-      let promise = new Promise((resolve, reject) => {
-        Assignment.findById(
-          { _id: assignments[0] },
-          (err, assignment) => {
-            let cr = { name: "test assignment", due: "date/2021" };
-            if (!err) {
-              if (assignment) {
-                cr = {
-                  name: assignment.name,
-                  due: assignment.dueDate,
-                };
-              }
-            }
-            console.log("resolving cr");
-            return resolve(cr);
-          } //end of assignment callback
-        ); //end of assignment -- mongo
-      }); //ennd of promise
-      promise.then((cr) => {
-        console.log("pushing cr into dt");
-        dt.push(cr);
-        //console.log(dt);
-        if (dt.length === len) {
-          // console.log(dt);
-          getStudentData(students, dt);
-          //return dt;
-          //console.log(dt);
-        }
-      });
-    } //end of for loop
-  } //function of assignment ends here
-
-  //getStudent data starts
-  async function getStudentData(students, dt) {
-    const st = [];
-    let len = students.length;
-    let s = { name: "Student name", email: "maili@mail.com" };
-    students.forEach((student) => {
-      let promise = new Promise((resolve, reject) => {
-        Student.findById({ _id: student.id }, (err, student) => {
-          if (!err) {
-            if (student) {
-              s = {
-                name: student.name,
-                email: student.email,
-              };
-            }
-          }
-          return resolve(s);
-        }); //end student mongo
-      }); //promise ends
-
-      promise.then((s) => {
-        //console.log(s);
-        st.push(s);
-        if (st.length === len) {
-          console.log(st);
-          console.log("------------------");
-          console.log(dt);
-        }
-      }); //resolve end
-    }); //end for each
-  } //student func ends
-  //res.send("success");
+    });
+  }; //end add course
 });
+
+//route under work -----change get from post at final---------under work---------------
+router.get("/course/:id", (req, res, next) => {
+  if (!req.isAuthenticated()) {
+    return res.redirect("/login");
+  }
+  let messageClass, message;
+  if (req.query.stat === "success") {
+    messageClass = "success";
+    message = "Assignment Created !";
+  } else if (req.query.stat === "fail") {
+    messageClass = "fail";
+    message = "Something went wrong !";
+  }
+  const cookies = new Cookies(req, res, { keys: keys });
+  const currentUser = cookies.get("User", { signed: true });
+  const courseId = req.params.id;
+  let date = new Date();
+  date.setDate(new Date().getDate() + 3);
+  // const a = new Assignment({
+  //   title: "Assignment 1",
+  //   course: req.body.courseId,
+  //   dueDate: date,
+  //   isActive: true,
+  // });
+  // a.save();
+  Course.findOne({ _id: courseId }, (err, course) => {
+    //console.log(course);
+    if (err) {
+      //will replace with error routes or redirects
+      return res.send(err);
+    }
+    if (!course) {
+      //error page will be updated
+      return res.send(err);
+    }
+    const courseId = course._id;
+    const code = course.uniqueCode;
+    const title = course.title;
+    let date = course.created;
+    date =
+      date.getDate() + "/" + date.getMonth() + 1 + "/" + date.getFullYear();
+    const totalStudents = course.students.length;
+    (async function main() {
+      let students;
+      let assignments;
+      try {
+        students = await Promise.all(
+          course.students.map((student) => {
+            return Student.findOne({ _id: student });
+          })
+        );
+      } catch (err) {
+        students = [];
+      }
+      try {
+        assignments = await Promise.all(
+          course.assignments.map((assignment) => {
+            return Assignment.findOne({ _id: assignment });
+          })
+        );
+      } catch (err) {
+        assignments = [];
+      }
+      // console.log(students);
+      // console.log(assignments);
+      const studentData = [];
+      const assignmentData = [];
+      students.forEach((student) => {
+        const st = {
+          id: student._id,
+          name: student.name,
+          email: student.email,
+        };
+        studentData.push(st);
+      });
+      assignments.forEach((assignment) => {
+        let dueDate;
+        try {
+          dueDate = assignment.dueDate;
+          dueDate = dueDate.getDate() + "/" + dueDate.getMonth() + 1;
+        } catch (err) {}
+        let as;
+        try {
+          as = {
+            id: assignment._id,
+            title: assignment.title,
+            description: assignment.description,
+            //created
+            due: dueDate,
+          };
+        } catch (err) {
+          return;
+        }
+        // console.log(assignment.created);
+        assignmentData.push(as);
+      });
+      // console.log(studentData);
+      //console.log(assignmentData);
+      return res.render("teacher/course", {
+        loggedUserName: currentUser,
+        uniqueCode: code,
+        courseId: courseId,
+        title: title,
+        created: date,
+        studentLength: studentData.length,
+        assignments: assignmentData,
+        students: studentData,
+        messageClass: messageClass,
+        message: message,
+      });
+    })();
+  });
+});
+
+//------------------------under construction route ---------------
 
 router.get("/course/share/:code", (req, res, next) => {
   if (!req.isAuthenticated()) {
@@ -313,6 +334,118 @@ router.get("/course/share/:code", (req, res, next) => {
     setLink: req.params.code,
     dashLink: "/teacher/dashboard",
   });
+});
+
+//route for handling submissions
+router.get("/course/submissions/:courseId/:id", (req, res, next) => {
+  if (!req.isAuthenticated()) {
+    return res.redirect("/login");
+  }
+  const courseId = req.params.courseId;
+  const assignmentId = req.params.id;
+  const cookies = new Cookies(req, res, { keys: keys });
+  const currentUser = cookies.get("User", { signed: true });
+  Teacher.findOne({ email: req.user.username }, (err, user) => {
+    if (err) {
+      return res.redirect("/teacher/course/" + courseId);
+    }
+    if (!user) {
+      return res.redirect("/login");
+    }
+    const submitted = [],
+      notSubmitted = [];
+    const data = [];
+    Course.findOne({ _id: courseId }, (err, course) => {
+      if (err) {
+        return res.redirect("/teacher/course/" + courseId);
+      }
+      if (!course) {
+        return res.redirect("/teacher/course/" + courseId);
+      }
+      const students = course.students;
+      (async function () {
+        const assignment = await Assignment.findOne({ _id: assignmentId });
+        let dis;
+        try {
+          if (!assignment.file) {
+            dis = "disabled";
+          }
+        } catch (err) {
+          dis = "disabled";
+        }
+        const assignmentData = {
+          title: assignment.title,
+          description: assignment.description,
+          file: assignment.file,
+          due: assignment.dueDate,
+          disabled: dis,
+        };
+        //console.log(assignmentData);
+        const submissions = await Promise.all(
+          students.map((st) => {
+            return Submission.findOne({
+              student: st,
+              assignment: assignmentId,
+            });
+          })
+        );
+        var filtered = submissions.filter(function (el) {
+          return el != null;
+        });
+        const submittedStudent = await Promise.all(
+          filtered.map((s) => {
+            return Student.findOne({ _id: s.student });
+          })
+        );
+
+        submittedStudent.forEach((st, index) => {
+          const dt = {
+            name: st.name,
+            status: "Submitted",
+            date: submissions[index].date,
+            file: submissions[index].file,
+            disabled: "",
+          };
+          submitted.push(dt);
+          data.push(dt);
+        });
+        //console.log(data);
+
+        const studentData = await Promise.all(
+          students.map((st) => {
+            return Student.findOne({ _id: st });
+          })
+        );
+        console.log(studentData);
+        studentData.forEach((d) => {
+          try {
+            if (submissions.some((sb) => sb.student === d._id.toString())) {
+              return;
+            }
+          } catch (err) {}
+          const dt = {
+            name: d.name,
+            status: "Not Submitted",
+            date: "-------",
+            file: "",
+            disabled: "disabled",
+          };
+          notSubmitted.push(dt);
+          data.push(dt);
+        });
+        return res.render("teacher/submissions", {
+          loggedUserName: currentUser,
+          submissions: data,
+          assignment: assignmentData,
+          id: courseId,
+        });
+      })(); //async end
+    });
+  }); //end teacher find
+});
+
+router.get("/sub", (req, res) => {
+  res.render("teacher/submissions");
 });
 
 router.get("/test", (req, res) => {

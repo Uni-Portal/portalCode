@@ -39,21 +39,14 @@
                 action="/teacher/course/"
                 id="course-id-<%=course.uniqueCode%>"
                 method="post"
-              >
-                <input
-                  type="text"
-                  name="courseId"
-                  value="<%=course.id%>"
-                  hidden
-                />
+              >                
               </form>
-              <button
-                type="submit"
+              <a                
                 class="btn btn-outline-success"
-                form="course-id-<%=course.uniqueCode%>"
+                href="/teacher/course/<%=course.id%>"
               >
                 More
-              </button>
+            </a>
               <button type="button" class="btn btn-outline-danger">
                 Delete
               </button>

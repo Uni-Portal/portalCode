@@ -5,6 +5,8 @@ const ejs = require("ejs");
 const session = require("express-session");
 const passport = require("passport");
 const passportLocalMongoose = require("passport-local-mongoose");
+const fileUpload = require("express-fileupload");
+const fs = require("fs");
 
 var Cookies = require("cookies");
 var keys = ["keyboard cat"];
@@ -14,6 +16,7 @@ const app = express();
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(fileUpload());
 
 app.use(
   session({
@@ -25,18 +28,18 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-// mongoose.connect("mongodb://localhost:27017/examDB", {
-//   useNewUrlParser: true,
-//   useUnifiedTopology: true,
-// });
+mongoose.connect("mongodb://localhost:27017/examDB", {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
 
-mongoose.connect(
-  "mongodb+srv://admin-subhayan:Subh@1234@cluster0.j2sww.mongodb.net/examDB?retryWrites=true&w=majority",
-  {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  }
-);
+// mongoose.connect(
+//   "mongodb+srv://admin-subhayan:Subh@1234@cluster0.j2sww.mongodb.net/examDB?retryWrites=true&w=majority",
+//   {
+//     useNewUrlParser: true,
+//     useUnifiedTopology: true,
+//   }
+// );
 
 mongoose.set("useFindAndModify", false);
 mongoose.set("useCreateIndex", true);
@@ -64,6 +67,8 @@ const Student = mongoose.model("student", studentSchema);
 const Invite = mongoose.model("invite", inviteSchema);
 const Refer = mongoose.model("referral", referralSchema);
 const Course = mongoose.model("course", courseSchema);
+const Assignment = mongoose.model("assignment", assignmentSchema);
+const Submission = mongoose.model("submission", submissionSchema);
 
 passport.use(User.createStrategy());
 passport.serializeUser(User.serializeUser());
@@ -71,7 +76,9 @@ passport.deserializeUser(User.deserializeUser());
 
 const adminRoutes = require("./routes/admin");
 const teacherRoutes = require("./routes/teacher");
+const studentRoutes = require("./routes/student");
 const { patch } = require("./routes/admin");
+const { request } = require("express");
 
 app.use("/admin", adminRoutes);
 
@@ -421,69 +428,300 @@ app.get("/login", (req, res, next) => {
   });
 });
 
-app.get("/student/invite/:id", (req, res, next) => {
-  Refer.findOne({ _id: req.params.id }, (err, refer) => {
+app.post("/teacher/add-assignment", (req, res) => {
+  if (!req.isAuthenticated()) {
+    return res.redirect("/login");
+  }
+  const courseId = req.body.courseId;
+  Teacher.findOne({ email: req.user.username }, (err, user) => {
     if (err) {
-      return res.send("<h3>Something wrong happened</h3>");
+      const stat = encodeURIComponent("fail");
+      return res.redirect("/teacher/course/" + courseId + "/?stat=" + stat);
     }
-    if (!refer) {
-      return res.send("Sorry buddy you are not invited, better luck next time");
-    } else {
-      return res.render("student-entry", {
-        inviteId: refer.teacher,
-        error: "",
-      });
+    if (!user) {
+      req.logout();
+      return res.redirect("/login");
     }
-  });
-});
-
-app.post("/student/key", (req, res) => {
-  Refer.findOne({ teacher: req.body.inviteId }, (err, refer) => {
-    let error;
-    if (err) {
-      error = "Something wrong happened.";
-    } else {
-      if (refer) {
-        //console.log(refer.key + " ::: " + req.body.uniqueKey);
-        if (parseInt(req.body.uniqueKey) === refer.key) {
-          return res.render("signup", {
-            email: " ",
-            userType: 3,
-            key: "",
-            teacher: refer.teacher,
-          });
-        } else {
-          return res.render("student-entry", {
-            error: "Invalid Key.",
-            inviteId: refer.teacher,
-          });
+    const id = user._id;
+    let promise = new Promise((resolve, reject) => {
+      Course.findById({ _id: req.body.courseId }, (err, course) => {
+        if (err) {
+          const stat = encodeURIComponent("fail");
+          return res.redirect("/teacher/course/" + courseId + "/?stat=" + stat);
         }
-      } else {
-        error = "Something wrong happened.";
+        if (!course) {
+          return res.redirect("/teacher/dashboard");
+        }
+        if (course.teacher != id) {
+          return res.redirect("/error");
+        }
+        return resolve(user._id);
+      });
+    });
+    promise.then((id) => {
+      let file, due;
+      try {
+        due = req.body.dueDate;
+        marks = req.body.marks;
+      } catch (err) {}
+      if (!req.files || Object.keys(req.files).length === 0) {
+        //console.log(req.body.description);
+        const ass = new Assignment({
+          title: req.body.title,
+          description: req.body.description,
+          created: new Date(),
+          course: req.body.courseId,
+          dueDate: due,
+          marks: marks,
+          isActive: true,
+        });
+        return saveAssignment(ass);
       }
-    }
-    res.render("student-entry", {
-      error: error,
-      inviteId: req.body.inviteId,
+      file = req.files.assignmentFile;
+      let uploadPath = __dirname + "/public/assignments" + "/" + file.name;
+      // console.log(uploadPath);
+
+      file.mv(uploadPath, (err) => {
+        // /assignments/" + file.name
+        if (err) {
+          //will fix it
+          const stat = encodeURIComponent("fail");
+          return res.redirect("/teacher/course/" + courseId + "/?stat=" + stat);
+        }
+        const ass = new Assignment({
+          title: req.body.title,
+          description: req.body.description,
+          created: new Date(),
+          course: req.body.courseId,
+          file: "/assignments/" + file.name,
+          dueDate: due,
+          isActive: true,
+        });
+        saveAssignment(ass);
+      });
+      // --------------under construction--------------------------------
+      function saveAssignment(assignment) {
+        assignment.save((err, a) => {
+          if (err) {
+            const stat = encodeURIComponent("fail");
+            return res.redirect(
+              "/teacher/course/" + courseId + "/?stat=" + stat
+            );
+          }
+          Course.updateOne(
+            { _id: req.body.courseId },
+            { $push: { assignments: a._id } },
+            (err) => {
+              if (!err) {
+                const stat = encodeURIComponent("success");
+                return res.redirect(
+                  "/teacher/course/" + courseId + "/?stat=" + stat
+                );
+              }
+            }
+          );
+        }); ///end save
+      } //saveassignment end
     });
   });
+
+  // console.log(req.body.courseId);
 });
 
-app.get("/student/dashboard", (req, res, next) => {
+// app.get("/test/up", (req, res) => {
+//   res.send(
+//     '<form action="/upload" method="POST" encType="multipart/form-data" ><input type="file" name="testFile"><button>Upload</button></form>'
+//   );
+// });
+
+// app.post("/upload", (req, res) => {
+//   console.log(req.files.testFile);
+// });
+
+//student assignment submission route under construction
+app.post("/student/submit", (req, res, next) => {
   if (!req.isAuthenticated()) {
-    return res.redirect("login");
+    return res.redirect("/login");
   }
-  res.send("student dashboard !");
+  Student.findOne({ email: req.user.username }, (err, user) => {
+    if (err) {
+      //will fix sooon
+      return res.send("error");
+    }
+    if (!user) {
+      return res.redirect("/login");
+    }
+    const assignmentId = req.body.assignmentId;
+    const courseId = req.body.courseId;
+    let fileLink, submissionId;
+    try {
+      fileLink = req.body.fileLink;
+      submissionId = req.body.submissionId;
+    } catch (err) {
+      fileLink = "";
+      submissionId = "";
+    }
+    let changeFile = false;
+    if (fileLink.length > 0 && submissionId.length > 0) {
+      changeFile = true;
+    }
+    if (!changeFile) {
+      saveFile();
+    } else {
+      //case for changing file delete previous one
+      console.log(fileLink);
+      const fpath = __dirname + "/public/" + fileLink;
+      fs.unlink(fpath, function (err) {
+        if (err && err.code == "ENOENT") {
+          console.log(err);
+        } else if (err) {
+          console.error("Error occurred while trying to remove file");
+        } else {
+          console.info(`removed`);
+          return saveFile();
+        }
+      });
+    }
+    function saveFile() {
+      let file = req.files.assignmentFile;
+      let uploadPath = __dirname + "/public/submissions" + "/" + file.name;
+      file.mv(uploadPath, (err) => {
+        // /assignments/" + file.name
+        if (err) {
+          //will fix it
+          // const stat = encodeURIComponent("fail");
+          // return res.redirect("/teacher/course/" + courseId + "/?stat=" + stat);
+          console.log("error adding file");
+          const stat = encodeURIComponent("fail");
+          return res.redirect(
+            "/student/assignment/" +
+              courseId +
+              "/" +
+              assignmentId +
+              "/" +
+              "?status=" +
+              stat
+          );
+          // return res.redirect("/student/dashboard");
+        }
+        if (changeFile) {
+          Submission.updateOne(
+            { _id: submissionId },
+            { file: "/submissions/" + file.name, date: new Date() },
+            (err) => {
+              if (err) {
+                const stat = encodeURIComponent("fail");
+                return res.redirect(
+                  "/student/assignment/" +
+                    courseId +
+                    "/" +
+                    assignmentId +
+                    "/" +
+                    "?status=" +
+                    stat
+                );
+                // return res.send("error");
+                //will fix soon
+              }
+              const stat = encodeURIComponent("updated");
+              return res.redirect(
+                "/student/assignment/" +
+                  courseId +
+                  "/" +
+                  assignmentId +
+                  "/" +
+                  "?status=" +
+                  stat
+              );
+              // return res.send("success");
+            }
+          );
+        } else {
+          let desc;
+          try {
+            if (req.body.description.length > 0) desc = req.body.description;
+            else desc = "";
+          } catch (err) {
+            desc = "";
+          }
+
+          const sub = new Submission({
+            assignment: assignmentId,
+            course: courseId,
+            student: user._id,
+            file: "/submissions/" + file.name,
+            description: desc,
+            date: new Date(),
+            isChecked: false,
+          });
+          sub.save((err, s) => {
+            if (err) {
+              //will change
+
+              const stat = encodeURIComponent("fail");
+              return res.redirect(
+                "/student/assignment/" +
+                  courseId +
+                  "/" +
+                  assignmentId +
+                  "/" +
+                  "?status=" +
+                  stat
+              );
+              //return res.send("error while saving into db");
+            }
+            Assignment.updateOne(
+              { _id: assignmentId },
+              { $push: { submissions: s._id } },
+              (err) => {
+                const stat = encodeURIComponent("success");
+                return res.redirect(
+                  "/student/assignment/" +
+                    courseId +
+                    "/" +
+                    assignmentId +
+                    "/" +
+                    "?status=" +
+                    stat
+                );
+                // return res.send("success uploaded");
+              }
+            ); //assignment end
+          }); //submission save error
+        }
+      }); //end mv
+    } //end save file
+  }); //end of student
 });
 
-app.get("/test/", (req, res) => {
-  res.send(req.query.status);
-});
+// ------------------route under construction------------
 
-app.get("/test2", (req, res) => {
-  var str = encodeURIComponent("check");
-  res.redirect("/test/?status=" + str);
-});
+app.use("/student", studentRoutes);
+
+//-file deletion--------------------------------
+// app.get("/test/", (req, res) => {
+//   const fpath =
+//     __dirname +
+//     "/public/assignments" +
+//     "/MOOC_cerificate_Subhayan_Sarkar_123180703096.pdf";
+//   fs.unlink(fpath, function (err) {
+//     if (err && err.code == "ENOENT") {
+//       // file doens't exist
+//       console.info("File doesn't exist, won't remove it.");
+//     } else if (err) {
+//       // other errors, e.g. maybe we don't have enough permission
+//       console.error("Error occurred while trying to remove file");
+//     } else {
+//       console.info(`removed`);
+//     }
+//   });
+// });
+// -----------file deletion----------------------------------------
+
+// app.get("/test2", (req, res) => {
+//   var str = encodeURIComponent("check");
+//   res.redirect("/test/?status=" + str);
+// });
 
 app.use("/", (req, res, next) => {
   res.render("error404");
@@ -491,5 +729,5 @@ app.use("/", (req, res, next) => {
 });
 
 app.listen(process.env.PORT || 3000, (req, res) => {
-  console.log("listening at port 30000....");
+  console.log("listening at port 3000....");
 });

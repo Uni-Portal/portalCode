@@ -24,7 +24,11 @@ const adminSchema = mongoose.Schema({
 
 const teacherSchema = mongoose.Schema({
   name: String,
-  email: String,
+  email: {
+    type: String,
+    required: true,
+    unique: true,
+  },
   mobile: Number,
   students: [String],
   courses: [String],
@@ -114,7 +118,7 @@ const courseSchema = mongoose.Schema({
 });
 
 const assignmentSchema = mongoose.Schema({
-  tile: {
+  title: {
     type: String,
     required: true,
   },
@@ -126,14 +130,16 @@ const assignmentSchema = mongoose.Schema({
     type: Date,
     deafualt: Date.now,
   },
-  desciption: String,
+  description: {
+    type: String,
+    default: "Questions Here",
+  },
   file: String,
   submissions: [String],
   dueDate: {
     type: Date,
-    required: true,
   },
-  isPending: Boolean,
+  isActive: Boolean,
 });
 
 const submissionSchema = mongoose.Schema({
@@ -150,7 +156,7 @@ const submissionSchema = mongoose.Schema({
     required: true,
   },
   file: String,
-  comment: String,
+  description: String,
   date: {
     type: Date,
     default: Date.now,

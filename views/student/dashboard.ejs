@@ -1,0 +1,352 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Dashboard</title>
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="icon" href="https://icon-library.com/images/university-icon-png/university-icon-png-7.jpg">
+<link href="https://fonts.googleapis.com/css2?family=Yusei+Magic&display=swap" rel="stylesheet">
+<style>
+html{
+	scroll-behavior : smooth;
+
+}
+body{
+	
+	font-family:Nunito;
+}
+.Course{
+  position: relative;
+  top: 10vh;
+}
+::-webkit-scrollbar {
+    display: none;
+}
+.shadow{
+	text-shadow:0px 4px 3px rgba(0,0,0,0.4),
+				0px 8px 13px rgba(0,0,0,0.1),
+				0px 18px 23px rgba(0,0,0,0.1);
+}
+
+    .vertical-menu {
+  width: 200px;
+}
+.row{
+  margin-right: 0px;
+}
+
+.vertical-menu a {
+    color: white;
+  display: block;
+  padding: 12px;
+  text-decoration: none;
+}
+
+.vertical-menu a:hover {
+    background-color: #84a9ac;
+}
+
+.vertical-menu a.active {
+  background-color: #839b97;
+  color: white;
+}
+
+    #examlist {
+      background-color: #dce3e7;
+      box-shadow: 5px 10px 18px #214151;
+      border-radius: 10px;
+      margin-top:  20px;
+     margin-left:  50px; */
+      margin-right:  20px; 
+      padding: 20px;
+      width: 20%;
+      height: 150px;
+}
+.comp_Add{
+        position: fixed;
+        right:4%;
+        top: 90%;
+        z-index: 5;
+        
+    }
+  #add_course{
+    z-index: 0;
+  }
+.btn.btn-success{
+  border-radius: 20px;
+  font-size: 18px;
+  transform: scale(1.2);
+  padding: 1rem 1.3rem 1rem 1.3rem;
+}
+nav.navbar{
+    background-color: #375263;
+    color: whitesmoke;
+    border-radius: 0px;
+    box-shadow: 0 0px 11px #00000094;
+    z-index: 1;
+    padding-top: 0.7rem;
+    height: 6rem;
+}
+
+
+.pop_up-add{
+        position: absolute;
+        top:50%;
+        left:50%;
+        transform: translate(-30%,-40%);
+        border: 1px solid black;
+        width: 40%;
+        height: 30vh;
+        z-index: 20;
+        border-radius: 12px;
+        
+        background-color: rgb(247, 244, 244);
+    }
+    .popup_head{
+        position: absolute;
+        color: rgba(54, 54, 54, 0.767);
+        font-size: 1.8vw;
+        top: 4%;
+        left: 7%;
+        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    }
+    .border_bottom-popup{
+        position: relative;
+        top: 6rem;
+        border-bottom:1px solid rgba(88, 88, 88, 0.685);
+    }
+    .popup_body{
+        position: absolute;
+        top: 40%;
+        left: 15%;
+        width: 70%;
+    }
+    .popup-course_label{
+        font-size: 0.9vw;
+    }
+    .popup-course_name{
+        width: 100%;
+        border-radius: 5px;
+        outline: none;
+        border: 1px solid gray;
+        
+    }
+    #invi{
+        position: relative;
+        height: 12vh;
+        
+    }
+    .close{
+        position: absolute;
+        font-size: 2.5vw;
+        font-weight: 200;
+        right: 7%;
+        top: 1rem;
+        cursor: pointer;
+        /* background-color: transparent;
+        border: transparent; */
+    }
+    .popup-button{
+        position: absolute;
+        top:10vh;
+        right: 0%;
+    }
+    .pop-upbackground{
+        display: none;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%; /* Full width */
+        height: 100vh;
+        z-index: 10;
+        overflow: auto; /* Enable scroll if needed */
+        background-color: rgb(0,0,0); /* Fallback color */
+        background-color: rgba(0, 0, 0, 0.521); /* Black w/ opacity */
+    
+    }
+    .col-sm-9.col-md-10{
+      padding: 0;
+      width: 83%;    
+    }
+    .dropdown{
+      position: absolute;
+      right: 3%;
+      transform: translateY(-3rem);
+      z-index: 30;
+    }
+    .dropdown-toggle{
+      /* position:absolute; */
+      color: rgb(255, 255, 255);
+    }
+    .dropdown-toggle:hover{
+      color: rgb(255, 255, 255);
+      text-decoration: none;
+      font-weight: 700;
+    }
+    .dropdown-toggle:focus{
+      color: rgb(255, 255, 255);
+      text-decoration: none;
+    }
+    .collapse.navbar-collapse{
+      position: relative;
+    }
+    .dropdown-menu{
+      position: absolute;
+      z-index: 30;
+    }
+
+    .success{
+      color:green;
+    }
+    .fail{
+      color:red;
+    }
+
+
+</style>
+
+
+</head>
+
+<body>
+<section>
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top" >
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+ <!-- <i class="fa fa-university fa-3x" aria-hidden="true" style="margin-top: 3px;"> -->
+</i>&nbsp;&nbsp;<span style="font-family: Yusei Magic; font-size: 30px;">&nbsp;Uni PortaL</span>
+<div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <!-- <span style="font-family: sans-serif;margin-top: -30px;  float: right;  font-size: 17px;">
+      SUSMITA DAS&nbsp;&nbsp;&nbsp;
+      <span style="float: right; font-size: 20px;margin-top: -2px; ">
+      <i class="fa fa-user-circle-o" aria-hidden="true">
+      </i>&nbsp;&nbsp;</span>
+    </span> -->
+    <li class="dropdown nav navbar-nav navbar-right">
+      <a class="dropdown-toggle" data-toggle="dropdown" href=""><%=loggedUserName%>
+        <span style="float: right; font-size: 20px;margin-top: -2px; ">
+          <!-- <i class="fa fa-user-circle-o" aria-hidden="true">
+          </i>&nbsp;&nbsp;--> </span> 
+      <span class="caret"></span></a>
+      <ul class="dropdown-menu">
+        <li><a href="#">Enroll</a></li>
+        <li><a href="#">Change Password</a></li>
+        <li><a href="/logout">Logout</a></li>
+      </ul>
+    </li>
+      
+    
+  </div>
+</nav>
+
+
+</section>
+<span class="comp_Add">
+  <button type="Submit" id="add_course" class="btn btn-success add_course">Enroll</button>
+</span>
+<section id="home" style="margin-top: -20px;">
+
+  <div class="row">
+    <div class="col-sm-3 col-md-2" style="background-color: #214252; height: 750px;">
+      <br>
+        <div class="vertical-menu">
+  <a href="/student/dashboard" class="active">&nbsp;&nbsp;&nbsp;<i class="fa fa-wifi" aria-hidden="true" style="color: white;"></i>&nbsp;&nbsp;Dashboard</a>
+  <a href="#">&nbsp;&nbsp;&nbsp;<i class="fa fa-list-ul" aria-hidden="true" style="color: white;"></i>&nbsp;&nbsp;Course</a>
+  <a href="#">&nbsp;&nbsp;&nbsp;<i class="fa fa-question-circle" aria-hidden="true" style="color: white;"></i>&nbsp;&nbsp;Help</a>
+
+</div>
+         
+        
+      </div>
+     
+    <div class="col-sm-9 col-md-10" style="background-color:whitesmoke; height: 100vh;">
+      <h3 class="<%=enrollClass%> enroll" style="position: relative;left: 40%;right: 50%;top:6%;"><%=enrollMessage%></h3>
+      <div class="container">
+        <div class="row Course">
+          <!-- under progresss  -->
+          <%  courses.forEach((course)=>{        %>
+
+         
+        <div class="col-sm-4" id="examlist">
+          <h3 ><%=course.title%></h3> 
+          <p >Code: <%=course.uniqueCode%></p>   
+          <a href="/student/course/<%=course.id%>"><button type="button" class="btn btn-primary active">Assignments</button></a>
+          </div>
+          <%      })                      %>
+             <!-- under progresss  -->
+
+
+         
+        
+</div>
+        </div>
+        
+    </div>
+  </div>
+  <div class="pop-upbackground">
+    <div class="pop_up-add">
+        <div class="main_popup">
+            <span class="popup_head">Enroll in new course</span>
+            <span class="close" id="closeBtn">&times;</span>
+            <div class="border_bottom-popup"></div>
+            <div class="popup_body">
+              <form action="/student/enroll" method="post">
+                <div class="popup-course">
+                    <label for="name" class="popup-course_label">Enter Course Code</label>
+                    <input class="popup-course_name" type="text" name="code" minlength="6" autocomplete="off" required>
+                </div>
+                <button type="submit" class="btn btn-success popup-button">Enroll</button>
+              </form>
+            </div>
+        </div>
+    </div>
+</div>
+  
+
+</section>
+
+
+
+<script>
+
+    
+    
+</script>
+
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/uikit@3.5.7/dist/js/uikit.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/uikit@3.5.7/dist/js/uikit-icons.min.js"></script>
+<script>
+var popup = document.getElementsByClassName("pop-upbackground");
+var addButton = document.getElementById("add_course");
+var closeBtn = document.getElementById("closeBtn");
+
+
+addButton.addEventListener("click",function(){
+    popup[0].style.display="block";  
+});
+closeBtn.addEventListener("click",function(){
+    popup[0].style.display="none";    
+});
+
+window.onclick = function(event) {
+    if (event.target == popup[0]) {
+        popup[0].style.display = "none";
+    }
+  };
+
+  if ($(".enroll").hasClass("success") || $(".enroll").hasClass("fail")) {
+  $(".enroll").fadeOut(4500);
+}
+</script>
+
+</body>
+</html>

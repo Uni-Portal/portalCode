@@ -1,170 +1,287 @@
-.navbar{
-    background-color: #375263;
-    color: whitesmoke;
-    font-weight: bolder;
-    box-shadow: 0 0px 11px #00000094;
+.navbar {
+  background-color: #375263;
+  color: whitesmoke;
+  font-weight: bolder;
+  box-shadow: 0 0px 11px #00000094;
 }
 
-
-@media (min-width: 992px){
-    .toggleright{
-        margin-right: 3.5rem ;
-    }
-    
-    }
-
-.left_nav{
-    background-color:#214252;
-    width: 18%;
-    height: 100vh;
-    position:fixed;
+@media (min-width: 992px) {
+  .toggleright {
+    margin-right: 3.5rem;
+  }
 }
 
-
-.left_nav-li{
-    color:rgb(243, 235, 235);
-    font-size: 1.2em;
-    list-style-type: none;
-    margin-top: 15px ;
+.left_nav {
+  background-color: #214252;
+  width: 16%;
+  height: 100vh;
+  position: fixed;
 }
 
-.componenets{
-    display: flex;
-    width: 100%;
-    height: 80vh;
-   
-
+.left_nav-li {
+  color: rgb(243, 235, 235);
+  font-size: 1.2em;
+  list-style-type: none;
+  margin-top: 15px;
 }
 
-.componenets .course_container{
-    width:82%;
-    height: 92vh;
-    position: relative;
-    left: 18%;
-    background-color: whitesmoke; 
-}
-.con_sub-col{
-    position: relative;
-    top:2rem;
-    left:8%;
-    width:85%;
-    
-}
-.sub_col{
-    width: 50%;
-    height: 65vh;
-    position: relative;
-    top: 3rem;
-    margin-right: 1.5rem;
-    padding: 10% 10% 2% 10%;
-    margin-left: 30px;
-    background-color: #dce3e7;
-    border-radius: 5px;
-    box-shadow: 2px 3px 7px rgba(0, 0, 0, 0.548);
+.componenets {
+  display: flex;
+  width: 100%;
+  height: 80vh;
 }
 
-.course_form{
-    position: relative;
-    top: -4em;
-    box-shadow: 2px 3px 8px rgba(0, 0, 0, 0.671);
+.componenets .course_container {
+  width: 83%;
+  height: 92vh;
+  position: relative;
+  left: 16%;
+  background-color: whitesmoke;
 }
-.assi__created{
-    position: relative;
-    left: 10%;
-    top: 3.5rem;
-    width:43%;
-    float: left;
-    font-size: 1rem;
-    color: rgba(37, 37, 116, 0.692);
-    font-weight: 700;
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+.con_sub-col {
+  position: relative;
+  top: 2rem;
+  left: 8%;
+  width: 85%;
 }
-.form-control.me-2.course_form{
-    width:50%;
+.sub_col {
+  width: 50%;
+  height: 65vh;
+  position: relative;
+  top: 3rem;
+  margin-right: 1.5rem;
+  padding: 10% 10% 2% 10%;
+  margin-left: 30px;
+  background-color: #dce3e7;
+  border-radius: 5px;
+  box-shadow: 2px 3px 7px rgba(0, 0, 0, 0.548);
 }
-.btn-search{
+
+.course_form {
+  position: relative;
+  top: -4em;
+  box-shadow: 2px 3px 8px rgba(0, 0, 0, 0.671);
+}
+.assi__created {
+  position: relative;
+  left: 10%;
+  top: 3.5rem;
+  width: 43%;
+  float: left;
+  font-size: 1rem;
+  color: rgba(37, 37, 116, 0.692);
+  font-weight: 700;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+.form-control.me-2.course_form {
+  width: 50%;
+}
+.btn-search {
+  position: relative;
+  top: -4em;
+  box-shadow: 2px 3px 8px rgba(0, 0, 0, 0.63);
+}
+.comp_Add {
+  position: absolute;
+  right: 6%;
+  top: 5rem;
+  z-index: 5;
+}
+.comp_header {
+  /* font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; 
     position: relative;
     top:-4em;
-    box-shadow: 2px 3px 8px rgba(0, 0, 0, 0.63);
+    width : 0%; */
+  left: 18.5%;
+  /* box-shadow: 2px 3px 8px rgba(0, 0, 0, 0.63); */
+  /* top:13%; */
 }
-.btn-more{
-    position: relative;
-    top:-4em;
-    margin-left:5px;
-    box-shadow: 2px 3px 8px rgba(0, 0, 0, 0.671);
+.add_course {
+  position: relative;
+  /* top:-4em; */
+  /* left: 1rem; */
+  box-shadow: 2px 3px 8px rgba(0, 0, 0, 0.63);
 }
-.course_head{
-    width:40%;
-    position: relative;
-    left: 8%;
-    top:4%;
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+.btn-more {
+  position: relative;
+  top: -4em;
+  margin-left: 5px;
+  box-shadow: 2px 3px 8px rgba(0, 0, 0, 0.671);
 }
-.hear--border{
-    border-bottom: 2px solid #214252;
+.course_head {
+  width: 40%;
+  position: relative;
+  left: 8%;
+  top: 4%;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
 }
-.assi_head{
-    position: relative;
-    top:-5rem;
+.hear--border {
+  border-bottom: 2px solid #214252;
 }
-.assi__border{
-    border-bottom:1px solid black;
-    width: 1rem;
+.assi_head {
+  position: relative;
+  top: -5rem;
 }
-.form__li{
-    font-weight: 600;
-    padding: 8px 4px 10px 20px;
-    list-style-type: none;
-    width: 100%;
-    
-    border-bottom: 1px solid rgb(77, 77, 77);
-    box-shadow: 0px .5px 7px rgba(0, 0, 0, 0.425);
-    transition: all .5s;
+.assi__border {
+  border-bottom: 1px solid black;
+  width: 1rem;
 }
-.scroll_div{
-    width: 99%;
-    height: 41vh;
-    overflow: scroll;
-    border-radius: 8px;
-    background-color: rgb(240, 245, 255);
-    transition: all 0.1s;
+.form__li {
+  font-weight: 600;
+  padding: 8px 4px 10px 20px;
+  list-style-type: none;
+  width: 100%;
+
+  border-bottom: 1px solid rgb(77, 77, 77);
+  box-shadow: 0px 0.5px 7px rgba(0, 0, 0, 0.425);
+  transition: all 0.5s;
+}
+
+.scroll_div {
+  width: 99%;
+  height: 41vh;
+  overflow: scroll;
+  border-radius: 8px;
+  background-color: rgb(240, 245, 255);
+  transition: all 0.1s;
 }
 .scroll_div::-webkit-scrollbar {
-    width: 15px;
-  }
-  
-  /* Track */
-  .scroll_div::-webkit-scrollbar-track {
-    box-shadow: inset 0 0 5px grey; 
-    border-radius: 10px;
-  }
-   
-  /* Handle */
-  .scroll_div::-webkit-scrollbar-thumb {
-    background: rgb(160, 165, 212); 
-    border-radius: 10px;
-  }
-  
-  /* Handle on hover */
-  .scroll_div::-webkit-scrollbar-thumb:hover {
-    background: rgb(147, 150, 172); 
+  width: 15px;
 }
 
-.form__ol{
-    padding: 5px;
-    border-radius: 3px;
-  
+/* Track */
+.scroll_div::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey;
+  border-radius: 10px;
 }
-.date__ass{
-    position: relative;
-    left: 14rem;
+
+/* Handle */
+.scroll_div::-webkit-scrollbar-thumb {
+  background: rgb(160, 165, 212);
+  border-radius: 10px;
 }
-.form__li:hover{
-    color: rgb(28, 28, 68);
-    background-color: rgb(139, 172, 233);
-    transform: scale(1.02);
+
+/* Handle on hover */
+.scroll_div::-webkit-scrollbar-thumb:hover {
+  background: rgb(147, 150, 172);
 }
-.form__span-check{
-    position: relative;
-   float: right;
+
+.form__ol {
+  padding: 5px;
+  border-radius: 3px;
+}
+.date__ass {
+  position: absolute;
+  right: 10%;
+}
+.form__li:hover {
+  color: rgb(28, 28, 68);
+  background-color: rgb(139, 172, 233);
+  transform: scale(1.02);
+  cursor: pointer;
+}
+.form__span-check {
+  position: relative;
+  float: right;
+}
+.pop_up-add {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-30%, -40%);
+  border: 1px solid black;
+  width: 40%;
+  height: 65vh;
+  z-index: 20;
+  border-radius: 12px;
+
+  background-color: rgb(247, 244, 244);
+}
+.popup_head {
+  position: absolute;
+  color: rgba(54, 54, 54, 0.767);
+  font-size: 1.8vw;
+  top: 4%;
+  left: 7%;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+.border_bottom-popup {
+  position: relative;
+  top: 4rem;
+  border-bottom: 1px solid rgba(88, 88, 88, 0.685);
+}
+.popup_body {
+  position: absolute;
+  top: 17%;
+  left: 15%;
+  width: 70%;
+}
+.popup-course_label {
+  font-size: 0.9vw;
+}
+.popup_update {
+  font-size: 0.9rem;
+}
+.popup-course_name {
+  width: 100%;
+  border-radius: 5px;
+  outline: none;
+  border: 1px solid gray;
+}
+
+#invi {
+  position: relative;
+  height: 8vh;
+}
+.popup_Or {
+  font-size: 1.2rem;
+  font-family: cursive;
+  line-height: 0%;
+}
+.popup-course_label {
+  line-height: 0%;
+}
+.close {
+  position: absolute;
+  font-size: 2.5vw;
+  font-weight: 200;
+  right: 7%;
+  cursor: pointer;
+  /* background-color: transparent;
+    border: transparent; */
+}
+
+.popup-button {
+  position: absolute;
+  top: 46vh;
+  right: 0%;
+}
+.pop-upbackground {
+  display: none;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100vh;
+  z-index: 10;
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0); /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.521); /* Black w/ opacity */
+}
+
+.success {
+  color: green;
+}
+
+.fail {
+  color: red;
+}
+
+.message {
+  position: relative;
+  /* top: 1%; */
+  bottom: 2%;
 }

@@ -24,3 +24,8 @@ function share() {
   let code = $(".share-code").val();
   alert(code);
 }
+
+function hitAnchor(assignmentId) {
+  console.log(assignmentId);
+  window.location = $("." + assignmentId).attr("href");
+}

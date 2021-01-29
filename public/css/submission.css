@@ -1,0 +1,177 @@
+
+.navbar{
+    background-color: #375263;
+    color: whitesmoke;
+    font-weight: bolder;
+    box-shadow: 0 0px 11px #00000094;
+}
+@media (min-width: 992px){
+    .toggleright{
+        margin-right: 3.5rem ;
+    }
+    
+    
+    }
+
+    .left_nav{
+        background-color:#214252;
+        width: 16%;
+        height: 100%;
+        position:fixed;
+        
+    }
+
+    .left_nav-li{
+        color:rgb(243, 235, 235);
+        font-size: 1.2em;
+        list-style-type: none;
+        margin-top: 15px ;
+    }
+
+    .comp_header{
+        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; 
+        position: relative;
+        width : 50%;
+        left: 18.5%;
+        font-size: 40px;
+        padding: 7px;
+    
+    }
+
+    .header_border{
+        border-bottom: 1px solid black;
+    }
+
+
+    .col_header{
+        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; 
+        position: relative;
+        width : 0%;
+        left: 13%;
+        font-size: 30px;
+    }
+
+    .col_border{
+        border-bottom: 1px dotted black;
+    }
+
+    .comp{
+        width:80%;
+        height: 100vh;
+        position: absolute;
+        left:19%;
+        top: 55vh;
+        display: flex;
+       height: 45vh;
+       outline: none;
+        /* height: 80%; */
+    
+}
+    
+    .comp-sub_col{
+        width:90%;
+        left: 90%;
+        margin-top: 50%;
+    }
+    .sub_col{
+        width: 100%;
+        position: relative;
+        top: 3rem;
+        padding: 15%;
+        margin-top: 20px;
+        
+       
+        background-color: #dce3e7;
+        border-radius: 5px;
+        box-shadow: 2px 3px 7px rgba(0, 0, 0, 0.548);
+    }
+
+
+    .txt_button{
+        box-shadow: 2px 3px 7px rgba(0, 0, 0, 0.548);
+    }
+
+    .thead-dark{
+        background-color: #375263;
+    }
+
+
+    .nav_bor{
+        border-bottom: 2px solid rgb(116, 115, 115);
+        width: 90%;
+        position:relative;
+        left: 5%;
+        margin-top: 10%;
+    }
+
+    .des_assing{
+        width: 70%;
+        position: absolute; 
+        left: 19%;
+        top: 25%;
+        background-color: #dce3e7;
+        border-radius: 5px;
+        box-shadow: 2px 3px 7px rgba(0, 0, 0, 0.548);
+        height: 25vh;
+        color: #4b4b4b;
+        padding: 1rem 0rem 0rem 2rem;
+        /* margin-top: 10%;    */
+    }
+    
+    .comp_file{
+        position: absolute;
+        left: 19%;
+        top: 19%;
+        outline: none;
+        /* padding: 10px; */
+    }
+
+    
+
+    .scroll_div{
+        width: 99%;
+        height: 41vh;
+        overflow: scroll;
+        border-radius: 8px;
+        background-color: rgb(240, 245, 255);
+        transition: all 0.1s;
+    }
+
+    .scroll_div::-webkit-scrollbar {
+        width: 15px;
+      }
+      
+      /* Track */
+      .scroll_div::-webkit-scrollbar-track {
+        box-shadow: inset 0 0 5px grey; 
+        border-radius: 10px;
+      }
+       
+      /* Handle */
+      .scroll_div::-webkit-scrollbar-thumb {
+        background: rgb(160, 165, 212); 
+        border-radius: 10px;
+      }
+      
+      /* Handle on hover */
+      .scroll_div::-webkit-scrollbar-thumb:hover {
+        background: rgb(147, 150, 172); 
+    }
+
+
+ol, ul{
+    padding-left: 0%;
+}
+
+
+    .side-link {
+      text-decoration: none;
+      color: white;
+      font-size: 1.2em;
+    }
+    .side-link:hover {
+      color: black;
+      cursor: pointer;
+    }
+
+

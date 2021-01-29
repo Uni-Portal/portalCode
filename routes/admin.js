@@ -371,8 +371,8 @@ router.get("/students", (req, res, next) => {
 });
 
 //testing route
-router.get("/user/invite", (req, res, next) => {
-  res.send("under progress !");
-});
+// router.get("/user/invite", (req, res, next) => {
+//   res.send("under progress !");
+// });
 
 module.exports = router;
