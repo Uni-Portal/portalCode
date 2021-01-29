@@ -28,18 +28,18 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-mongoose.connect("mongodb://localhost:27017/examDB", {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+// mongoose.connect("mongodb://localhost:27017/examDB", {
+//   useNewUrlParser: true,
+//   useUnifiedTopology: true,
+// });
 
-// mongoose.connect(
-//   "mongodb+srv://admin-subhayan:Subh@1234@cluster0.j2sww.mongodb.net/examDB?retryWrites=true&w=majority",
-//   {
-//     useNewUrlParser: true,
-//     useUnifiedTopology: true,
-//   }
-// );
+mongoose.connect(
+  "mongodb+srv://admin-subhayan:Subh@1234@cluster0.j2sww.mongodb.net/examDB?retryWrites=true&w=majority",
+  {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  }
+);
 
 mongoose.set("useFindAndModify", false);
 mongoose.set("useCreateIndex", true);
